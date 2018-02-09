@@ -10,4 +10,5 @@
 
 </ul>
 
+<%= link "Chat", to: page_path(@conn, :index), class: "btn btn-info" %><br><br>
 <%= link "Back", to: user_path(@conn, :index) %>
