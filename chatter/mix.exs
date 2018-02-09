@@ -8,6 +8,7 @@ defmodule Chatter.Mixfile do
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps()
@@ -20,6 +21,8 @@ defmodule Chatter.Mixfile do
   def application do
     [
       mod: {Chatter, []},
+      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+                    :phoenix_ecto, :postgrex, :comeonin],
       extra_applications: [:logger]
     ]
   end
@@ -40,8 +43,9 @@ defmodule Chatter.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
-    ]
+      {:cowboy, "~> 1.0"},
+      {:comeonin, "~> 3.0"},
+      {:guardian, "~> 0.14"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -19,5 +19,23 @@ defmodule Chatter.User do
     |> unique_constraint(:email)
   end
 
+  def reg_changeset(struct, params \\ %{}) do
+    struct
+    |> changeset(params)
+    |> cast(params, [:password], []) #make sure to see if string
+    |> validate_length(:password, min: 5) #min length 5
+    |> hash_pw() #take structure, strip pass from it, encrypt it and put in db
+  end
+
+
+  defp hash_pw(changeset) do
+    case changeset do #check if changeset is valid
+      %Ecto.Changeset{valid?: true, changes: %{password: p}} ->
+        put_change(changeset, :encrypt_pass, Comeonin.Pbkdf2.hashpwsalt(p))
+        #put change on change set and encrypt in using pbkdf2
+      _ ->
+        changeset
+    end
+  end
 
 end

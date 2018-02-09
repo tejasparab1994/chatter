@@ -21,7 +21,7 @@ defmodule Chatter.UserController do
     def create(conn, %{"user" => user_params}) do
       #passing connection and user
       #coming from model, empty user and populating with user params
-        changeset = User.changeset(%User{}, user_params)
+        changeset = User.reg_changeset(%User{}, user_params)
 
         #if changeset that comes from controller satisfies the rules of
         # changeset model then inserted into db
@@ -48,7 +48,7 @@ defmodule Chatter.UserController do
   	def update(conn, %{"id" => id, "user" => user_params}) do
       user = Repo.get!(User, id)
       #create the changeset and populate it with user params
-      changeset = User.changeset(user, user_params)
+      changeset = User.reg_changeset(user, user_params)
 
       #we want to see if user_params fit our changeset
       case Repo.update(changeset) do

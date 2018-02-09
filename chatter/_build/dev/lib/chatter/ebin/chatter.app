@@ -1,8 +1,5 @@
 {application,chatter,
-             [{applications,[kernel,stdlib,elixir,logger,gettext,
-                             phoenix_pubsub,cowboy,phoenix_html,phoenix,
-                             phoenix_live_reload,postgrex,phoenix_ecto]},
-              {description,"chatter"},
+             [{description,"chatter"},
               {modules,['Elixir.Chatter','Elixir.Chatter.Endpoint',
                         'Elixir.Chatter.ErrorHelpers',
                         'Elixir.Chatter.ErrorView','Elixir.Chatter.Gettext',
@@ -18,4 +15,7 @@
               {registered,[]},
               {vsn,"0.0.1"},
               {mod,{'Elixir.Chatter',[]}},
+              {applications,[kernel,stdlib,elixir,logger,phoenix,
+                             phoenix_pubsub,phoenix_html,cowboy,gettext,
+                             phoenix_ecto,postgrex,comeonin]},
               {extra_applications,[logger]}]}.
